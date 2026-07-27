@@ -38,32 +38,92 @@ STEP 6:Splitting the data into test and train<BR>
 
 ##  PROGRAM:
 ```Python
-import pandas as pd                                                 # Importing Libraries
-import io
-from sklearn.preprocessing import StandardScaler
+# NAME : K S VINAY SUHIRTHAN
+# REG.NO: 212224230305
+
+#importing libraries
+import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
-df=pd.read_csv("Churn_Modelling.csv",index_col="RowNumber")         # Read the dataset from drive
-df.head()
-```
-```Python
-df.isnull().sum()                                                   # Finding Missing Values
-```
-```Python                                               
-df.duplicated().sum()                                               # Check For Duplicates
-```
-```Python                                              
-df=df.drop(['Surname', 'Geography','Gender'], axis=1)               # Remove Unnecessary Columns
-scaler=StandardScaler()                                             # Normalize the dataset
-df=pd.DataFrame(scaler.fit_transform(df))
-df.head()
-```
-```Python
-X,Y=df.iloc[:,:-1].values ,df.iloc[:,-1].values                     # Split the dataset into input and output
-print('Input:\n',X,'\nOutput:\n',Y) 
-Xtrain,Xtest,Ytrain,Ytest = train_test_split(X, Y, test_size=0.2)   # Splitting the data for training & Testing
-print("Xtrain:\n" ,Xtrain, "\nXtest:\n", Xtest)                     # X Train and Test
-print("\nYtrain:\n" ,Ytrain, "\nYtest:\n", Ytest)                   # Y Train and Test
+from sklearn.preprocessing import LabelEncoder 
+
+df = pd.read_csv(r"C:\Users\ksvin\Downloads\crop_yield.csv")
+
+#-------------------------------------------------------------------------------------
+print(df.info())
+#-------------------------------------------------------------------------------------
+#checking for null value and duplicate values
+print(df.isnull().sum())
+print(df.duplicated().sum())
+#-------------------------------------------------------------------------------------
+#outlier detection
+Q1 = df["Annual_Rainfall"].quantile(0.25)
+Q3 = df["Annual_Rainfall"].quantile(0.75)
+IQR = Q3 - Q1
+
+lower = Q1 - 1.5 * IQR
+upper = Q3 + 1.5 * IQR
+
+outliers = df[(df["Annual_Rainfall"] < lower) | (df["Annual_Rainfall"] > upper)]
+
+print("Number of outliers:", len(outliers))
+#-------------------------------------------------------------------------------------
+#outlier removal
+Q1 = df["Annual_Rainfall"].quantile(0.25)
+Q3 = df["Annual_Rainfall"].quantile(0.75)
+IQR = Q3 - Q1
+
+lower = Q1 - 1.5 * IQR
+upper = Q3 + 1.5 * IQR
+
+df = df[(df["Annual_Rainfall"] >= lower) & (df["Annual_Rainfall"] <= upper)]
+print(df.head(2))
+#-------------------------------------------------------------------------------------
+#scanlling data
+
+
+scaler = MinMaxScaler()
+
+df[["Production_Scaled", "Area_Scaled", "Annual_Rainfall_Scaled"]] = scaler.fit_transform(
+    df[["Production", "Area", "Annual_Rainfall"]]
+)
+#-------------------------------------------------------------------------------------
+print(df[["Production", "Production_Scaled",
+          "Area", "Area_Scaled",
+          "Annual_Rainfall", "Annual_Rainfall_Scaled"]].head())
+#-------------------------------------------------------------------------------------
+#finding the best encoding class
+print(df["Crop"].unique())
+print(df["Season"].unique())
+print(df["State"].unique())
+#-------------------------------------------------------------------------------------
+
+#label encoding
+
+le = LabelEncoder()
+
+df["Season"] = le.fit_transform(df["Season"])
+#-------------------------------------------------------------------------------------
+mapping = dict(zip(le.classes_, le.transform(le.classes_)))
+print(mapping)
+#-------------------------------------------------------------------------------------
+print(df.head())
+#-------------------------------------------------------------------------------------
+# normalising pesticide column
+df["Pesticide_Normalized"] = MinMaxScaler().fit_transform(df[["Pesticide"]])
+
+print(df[["Pesticide", "Pesticide_Normalized"]].head())
+#-------------------------------------------------------------------------------------
+#Splitting the data into test and train
+X = df.drop("Yield", axis=1)
+y = df["Yield"]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+print("Training data:", X_train.shape)
+print("Testing data:", X_test.shape)
 ```
 
 
