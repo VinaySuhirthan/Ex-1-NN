@@ -129,22 +129,24 @@ print("Testing data:", X_test.shape)
 
 ## OUTPUT:
 ### DATASET:
-![image](https://github.com/user-attachments/assets/4e75215a-6909-47e8-be89-f1b0dcf64069)
+<img width="571" height="512" alt="image" src="https://github.com/user-attachments/assets/ba48789e-deef-4202-9d97-194d878c0607" />
+
 
 ### NULL VALUES: 
-![image](https://github.com/user-attachments/assets/1a4ab591-3115-42e5-88c6-c2356d1175b5)
+<img width="537" height="408" alt="image" src="https://github.com/user-attachments/assets/244d3b8a-4cc5-4dc1-a684-d7bcbea14eba" />
+
 
 ### NORMALIZED DATA:
-![image](https://github.com/user-attachments/assets/27a5d162-c488-42b5-b5b9-fe563cf3062c)
-### DATA SPLITTING:
-![image](https://github.com/user-attachments/assets/e5154e4d-b3f4-444e-9d20-5a3d908c4797)
-![image](https://github.com/user-attachments/assets/6d65b734-6632-4fa7-aa91-39c6feb88e5e)
+<img width="1107" height="530" alt="image" src="https://github.com/user-attachments/assets/e4cddde0-bd8d-45b3-a2e4-ef8d2b3789f5" />
+
+### LABEL ENCODING:
+
+<img width="976" height="570" alt="image" src="https://github.com/user-attachments/assets/ef6aa1a6-7aaf-4023-a122-1536bca58dfe" />
+
 
 ### TRAIN AND TEST DATA:
-![image](https://github.com/user-attachments/assets/8716f8a6-4f08-42ea-9c6a-1b86bb38ae00)
-![image](https://github.com/user-attachments/assets/4214bcfc-f2c1-4f69-b7b0-6ead12703483)
-![image](https://github.com/user-attachments/assets/f219a314-14c7-4921-a631-df59b3c46301)
-![image](https://github.com/user-attachments/assets/025abc61-60a1-4f7d-b8ca-40210b03f7f4)
+<img width="698" height="367" alt="image" src="https://github.com/user-attachments/assets/0fadef62-a1fe-4fea-8d48-c6989f802ca9" />
+
 
 ## RESULT:
 Thus, Implementation of Data Preprocessing is done in python using a data set downloaded from Kaggle.
